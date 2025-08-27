@@ -1,0 +1,20 @@
+@startuml BibliotecaContext
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+Person(usuario, "Usuário", "Usuário que interage com o sistema")
+System(BibliotecaDeSophia, "BibliotecaDeSophia", "Sistema que gerencia o catálogo de livros e empréstimos")
+
+System(Usuarios, "CadastroDeUsuarios", "CRUD de Utilizadores do sistema.")
+System(Leitores, "CadastroDeLeitores", "CRUD de Leitores da Biblioteca.")
+System(Classificadores, "CadastroDeClassificadores", "CRUD de Tipos de Sistemas de Classificação.")
+System(Acervos, "CadastroAcervos", "Manutenção na base de Leitores.")
+
+Rel(usuario, BibliotecaDeSophia, "Usa")
+
+Rel(BibliotecaDeSophia, Leitores, "Cadastra, Atualiza Leitores")
+Rel(BibliotecaDeSophia, Classificadores, "Atualiza base")
+Rel(BibliotecaDeSophia, Acervos, "Atualiza base")
+
+@enduml
+
+
