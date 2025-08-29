@@ -1,0 +1,38 @@
+---
+config:
+  theme: neutral
+---
+C4Container
+    Person(user, "Usuário", "Interage com a aplicação web")
+    System_Boundary(BibliotecaPierre, "Sistema BibliotecaPierre") {
+        Container(webUI, "Interface Web", "Thymeleaf", "Interface do usuário")
+        Container(controllerLayer, "Controller Layer", "Spring MVC", "Controladores REST")
+        Container(serviceLayer, "Service Layer", "Spring Service", "Lógica de negócio")
+        Container(repositoryLayer, "Repository Layer", "Spring Data JPA", "Acesso a dados")
+        Container(usuarioDomain, "Domínio Usuario", "Java", "Usuario.java, UsuarioController.java, UsuarioService.java, UsuarioRepository.java, UsuarioRequest.java")
+        Container(livroDomain, "Domínio Livro", "Java", "Livro.java, LivroController.java, LivroService.java, LivroRepository.java, LivroRequest.java")
+        Container(emprestimoDomain, "Domínio Empréstimo", "Java", "Emprestimo.java, EmprestimoController.java, EmprestimoService.java, EmprestimoRepository.java, EmprestimoRequest.java")
+        Container(dtoPackage, "Pacote DTO", "Java", "com.example.BibliotecaPierre.dto - DTOs compartilhados")
+    }
+    SystemDb(database, "Database", "PostgreSQL", "Armazena dados")
+    System_Ext(externalApi, "API Externa", "REST", "Serviços externos")
+    Rel(user, webUI, "Acessa")
+    Rel(webUI, controllerLayer, "Consome API")
+    Rel(controllerLayer, serviceLayer, "Invoca serviços")
+    Rel(serviceLayer, repositoryLayer, "Acessa dados")
+    Rel(repositoryLayer, database, "Persiste dados")
+    Rel(controllerLayer, usuarioDomain, "Usa Controller")
+    Rel(controllerLayer, livroDomain, "Usa Controller")
+    Rel(controllerLayer, emprestimoDomain, "Usa Controller")
+    Rel(serviceLayer, usuarioDomain, "Usa Service")
+    Rel(serviceLayer, livroDomain, "Usa Service")
+    Rel(serviceLayer, emprestimoDomain, "Usa Service")
+    Rel(repositoryLayer, usuarioDomain, "Usa Repository")
+    Rel(repositoryLayer, livroDomain, "Usa Repository")
+    Rel(repositoryLayer, emprestimoDomain, "Usa Repository")
+    Rel(controllerLayer, dtoPackage, "Usa DTOs")
+    Rel(serviceLayer, dtoPackage, "Usa DTOs")
+    Rel(usuarioDomain, dtoPackage, "Trocas DTO")
+    Rel(livroDomain, dtoPackage, "Trocas DTO")
+    Rel(emprestimoDomain, dtoPackage, "Trocas DTO")
+    Rel(serviceLayer, externalApi, "Consulta APIs")

@@ -1,0 +1,126 @@
+erDiagram
+    BIBLIOTECA ||--o{ USUARIO : possui
+    BIBLIOTECA ||--o{ LIVRO : possui
+    BIBLIOTECA ||--o{ CATEGORIA : organiza
+    BIBLIOTECA ||--o{ EDITORA : trabalha_com
+    BIBLIOTECA ||--o{ AUTOR : registra
+    BIBLIOTECA ||--o{ EXEMPLAR : possui
+    BIBLIOTECA ||--o{ EMPRESTIMO : gerencia
+    BIBLIOTECA ||--o{ RESERVA : gerencia
+    BIBLIOTECA ||--o{ MULTA : gerencia
+ 
+    USUARIO }|..|{ ENDERECO : possui
+    USUARIO ||--o{ EMPRESTIMO : realiza
+    USUARIO ||--o{ RESERVA : faz
+    LIVRO ||--|{ EXEMPLAR : contem
+    LIVRO ||--|{ AUTORIA : "escrito por"
+    AUTOR ||--o{ AUTORIA : "autor de"
+    LIVRO ||--o{ EMPRESTIMO : "emprestado em"
+    LIVRO ||--o{ RESERVA : "reservado em"
+    EXEMPLAR ||--o{ EMPRESTIMO : "utilizado em"
+    CATEGORIA ||--|{ LIVRO : classifica
+    EDITORA ||--o{ LIVRO : publica
+    EMPRESTIMO ||--|{ MULTA : pode_gerar
+    USUARIO ||--o{ MULTA : possui
+
+    BIBLIOTECA {
+        int id
+        string nome
+        string endereco
+        string telefone
+        string email
+    }
+
+    USUARIO {
+        int id
+        int bibliotecaid
+        string nome
+        string email
+        string telefone
+        string dni
+        string dniTipo
+        string senha
+        date dataNascimento
+        string tipoUsuario
+        date dataCadastro
+        date dataAtualizacao
+        boolean ativo
+    }
+
+    ENDERECO {
+        int id
+        int usuarioId
+        string logradouro
+        string cidade
+        string estado
+        string cep
+    }
+
+    LIVRO {
+        int id
+        int bibliotecaid
+        string titulo
+        string isbn
+        int editoraId
+        int categoriaId
+        int anoPublicacao
+    }
+
+    EXEMPLAR {
+        int id
+        string livroId
+        string codigoExemplar
+        boolean disponivel
+    }
+
+    AUTOR {
+        int id
+        string nome
+        string nacionalidade
+    }
+
+    AUTORIA {
+        string livroId
+        string autorId
+    }
+
+    EMPRESTIMO {
+        int id
+        string usuarioId
+        string exemplarId
+        date dataEmprestimo
+        date dataDevolucaoPrevista
+        date dataDevolucaoReal
+        string status
+    }
+
+    RESERVA {
+        int id
+        string usuarioId
+        string livroId
+        date dataReserva
+        date dataExpiracao
+        string status
+    }
+
+    MULTA {
+        int id
+        string usuarioId
+        string emprestimoId
+        decimal valor
+        date dataGeracao
+        date dataPagamento
+        string status
+    }
+
+    CATEGORIA {
+        int id
+        string nome
+        string descricao
+    }
+
+    EDITORA {
+        int id
+        string nome
+        string cidade
+    }
