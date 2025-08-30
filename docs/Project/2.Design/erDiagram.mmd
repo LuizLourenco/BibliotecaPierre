@@ -1,47 +1,33 @@
 erDiagram
-    BIBLIOTECA ||--o{ USUARIO : possui
-    BIBLIOTECA ||--o{ LIVRO : possui
-    BIBLIOTECA ||--o{ CATEGORIA : organiza
-    BIBLIOTECA ||--o{ EDITORA : trabalha_com
-    BIBLIOTECA ||--o{ AUTOR : registra
-    BIBLIOTECA ||--o{ EXEMPLAR : possui
-    BIBLIOTECA ||--o{ EMPRESTIMO : gerencia
-    BIBLIOTECA ||--o{ RESERVA : gerencia
-    BIBLIOTECA ||--o{ MULTA : gerencia
- 
     USUARIO }|..|{ ENDERECO : possui
     USUARIO ||--o{ EMPRESTIMO : realiza
     USUARIO ||--o{ RESERVA : faz
-    LIVRO ||--|{ EXEMPLAR : contem
-    LIVRO ||--|{ AUTORIA : "escrito por"
+    ACERVO ||--|{ EXEMPLAR : contem
+    ACERVO ||--|{ AUTORIA : "escrito por"
+
+
+    ACERVO ||--o{ EMPRESTIMO : "emprestado em"
+    ACERVO ||--o{ RESERVA : "reservado em"
+
     AUTOR ||--o{ AUTORIA : "autor de"
-    LIVRO ||--o{ EMPRESTIMO : "emprestado em"
-    LIVRO ||--o{ RESERVA : "reservado em"
+
     EXEMPLAR ||--o{ EMPRESTIMO : "utilizado em"
-    CATEGORIA ||--|{ LIVRO : classifica
-    EDITORA ||--o{ LIVRO : publica
+    CATEGORIA ||--|{ ACERVO : classifica
+    EDITORA ||--o{ ACERVO : publica
     EMPRESTIMO ||--|{ MULTA : pode_gerar
     USUARIO ||--o{ MULTA : possui
 
-    BIBLIOTECA {
-        int id
-        string nome
-        string endereco
-        string telefone
-        string email
-    }
-
     USUARIO {
         int id
-        int bibliotecaid
         string nome
         string email
         string telefone
-        string dni
-        string dniTipo
+        string docIdentificacao
+        string tipoDoc
         string senha
-        date dataNascimento
         string tipoUsuario
+        string atividadesParticipadas
+        date dataNascimento
         date dataCadastro
         date dataAtualizacao
         boolean ativo
@@ -56,20 +42,75 @@ erDiagram
         string cep
     }
 
+    ACERVO {
+        int id
+        string titulo
+        int categoriaId
+        string tipoAquisicao
+        data dateAquisicao
+        data dataCadastro
+        data dataAtualizacao
+        data dataRemocao
+        boolean ativo
+    }
+
     LIVRO {
         int id
-        int bibliotecaid
-        string titulo
+        int acervoId
+        string tombo
+        int principalAutorId
+        int secundarioAutorId
+        string subtitulo
         string isbn
         int editoraId
-        int categoriaId
+        int edicao
         int anoPublicacao
+        int numeroPaginas
+        string idioma
+        string resumo
+        string palavrasChave
+        string formato
+        string dimensoes
+        string peso
+        string capa
+        string disponibilidade
+        string localizacao
+        string tipoMaterial
+        string publicoAlvo
+        string classificacaoIndicativa
+        string status
     }
+
+
+    PERIODICO {
+        int id
+        int acervoId
+        string issn
+        string volume
+        string numero
+        date dataPublicacao
+        string tipoMaterial
+        string disponibilidade
+        string localizacao
+        string publicoAlvo
+        string classificacaoIndicativa
+        string status
+    }
+
+
+    TipoUsuario {
+        string ALUNO
+        string PROFESSOR
+        string FUNCIONARIO
+        string EXTERNO
+    }
+
+
 
     EXEMPLAR {
         int id
-        string livroId
-        string codigoExemplar
+        int livroId
+        int codigoExemplar
         boolean disponivel
     }
 
@@ -80,14 +121,14 @@ erDiagram
     }
 
     AUTORIA {
-        string livroId
+        int livroId
         string autorId
     }
 
     EMPRESTIMO {
         int id
-        string usuarioId
-        string exemplarId
+        int usuarioId
+        int exemplarId
         date dataEmprestimo
         date dataDevolucaoPrevista
         date dataDevolucaoReal
@@ -105,8 +146,8 @@ erDiagram
 
     MULTA {
         int id
-        string usuarioId
-        string emprestimoId
+        int usuarioId
+        int emprestimoId
         decimal valor
         date dataGeracao
         date dataPagamento
@@ -124,3 +165,6 @@ erDiagram
         string nome
         string cidade
     }
+
+
+

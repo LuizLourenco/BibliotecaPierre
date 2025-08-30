@@ -66,32 +66,9 @@ CLASSIFICAÇÃO:
 
 ------------------
 
-O que é ISBN?
- - Identificador Único
- - Número do ISBN
- - Formato (10 dígitos ou 13 dígitos)
- - Editora (todos os dados referentes a esta editora)
- - Ano de Publicação
- - País de Publicação
- - Tipo de Publicação (livro, e-book, etc.)
- - Título da Obra
- - Autor(es) (todos os dados referentes aos autores)
- - Gênero (área)
- - Sinopse
- - Número de Páginas
- - Idioma
- - Edição
- - Volume (se aplicável)
- - Categoria (ficção, não-ficção, acadêmico, etc.)
-
-
-------------------
-
 ACERVOS:
-    - Identificador Único
-   - Codigo da Biblioteca
-   - Classificação (livro, artigo, revista, etc.)
-   - Formato (digital ou impresso)
+   - Identificador Únicoin
+   - Classificação ou Categoria (livro, artigo, revista, etc.)
    - Titulo da Obra / Artigo
    - Genero (area)
    - ISBN
@@ -122,8 +99,8 @@ ACERVOS:
    - Dados da aquisigäo (todos os dados referentes a aquisiçäo)
    - Localização fisica da biblioteca
    - Ala
-     - Corredor
-     - Prateleira
+   - Corredor
+   - Prateleira
 
 
 -------------------
